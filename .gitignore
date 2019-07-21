@@ -1,0 +1,12 @@
+bin
+build*
+include
+lib
+lib64
+share/*
+!share/lua
+!share/luajit-2.0.5
+share/luajit-2.0.5/jit/*
+!share/materials
+share/materials/.cache
+!share/mplstyle

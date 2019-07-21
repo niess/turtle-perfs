@@ -1,0 +1,22 @@
+diff --git a/src/pumas.c b/src/pumas.c
+index bcf47f7..61a095f 100644
+--- a/src/pumas.c
++++ b/src/pumas.c
+@@ -5348,7 +5348,7 @@ void step_rotate_direction(struct pumas_context * context,
+         /* Check the numerical sine. */
+         const double stsq = 1. - cos_theta * cos_theta;
+         if (stsq <= 0.) return;
+-        const double st = sqrt(stsq);
++        double st = sqrt(stsq);
+ 
+         /* select the co-vectors for the local basis. */
+         double u0x = 0., u0y = 0., u0z = 0.;
+@@ -5388,6 +5388,8 @@ void step_rotate_direction(struct pumas_context * context,
+         const double phi = M_PI * (1. - 2. * context->random(context));
+         const double cp = cos(phi);
+         const double sp = sin(phi);
++        cos_theta = 1.; /* Disable the rotation but still do the math */
++        st = 0.;
+         direction[0] = cos_theta * direction[0] + st * (cp * u0x + sp * u1x);
+         direction[1] = cos_theta * direction[1] + st * (cp * u0y + sp * u1y);
+         direction[2] = cos_theta * direction[2] + st * (cp * u0z + sp * u1z);

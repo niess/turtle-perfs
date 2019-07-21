@@ -1,0 +1,27 @@
+os: linux
+sudo: require
+
+addons:
+  apt:
+    packages:
+      - libboost-thread-dev
+      - libboost-system-dev
+      - libpng-dev
+
+language: cpp
+compiler: gcc
+
+cache:
+  directories:
+    - build
+    - include
+    - lib
+    - share/topography
+
+install:
+  - mkdir -p build && cd build && cmake .. && make install && cd -
+
+script:
+  - . setup.sh
+  - trace.lua CDC 26 10
+  - simulate.lua ULS 90 5
